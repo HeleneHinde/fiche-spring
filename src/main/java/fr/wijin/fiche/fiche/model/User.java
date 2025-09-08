@@ -31,10 +31,10 @@ public class User implements Serializable {
     @Column(length = 255)
     private String password;
 
-    @OneToMany(mappedBy = "commentaires", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "auteurCommentaire", cascade = CascadeType.ALL)
     private List<Commentaire> commentaires;
 
-    @OneToMany(mappedBy = "fiches", cascade = CascadeType.DETACH)
+    @OneToMany(mappedBy = "auteurFiche", cascade = CascadeType.DETACH)
     private List<Fiche> fiches;
 
     @Enumerated(EnumType.STRING)

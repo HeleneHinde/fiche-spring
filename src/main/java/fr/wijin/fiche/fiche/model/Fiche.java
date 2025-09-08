@@ -40,7 +40,7 @@ public class Fiche implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     private User auteurFiche;
 
-    @OneToMany(mappedBy = "commentaires", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "fiche", cascade = CascadeType.ALL)
     private List<Commentaire> commentaires;
 
     @ManyToMany(cascade = CascadeType.DETACH)
