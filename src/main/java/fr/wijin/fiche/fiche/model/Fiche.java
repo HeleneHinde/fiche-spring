@@ -25,7 +25,7 @@ public class Fiche implements Serializable{
         @Column(length = 500)
         private String texteFiche;
 
-        @Column(length = 255)
+        @Column
         private Date date;
 
         @ManyToOne(fetch = FetchType.LAZY)

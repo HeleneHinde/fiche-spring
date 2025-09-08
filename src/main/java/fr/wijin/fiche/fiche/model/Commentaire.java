@@ -30,7 +30,7 @@ public class Commentaire implements Serializable {
         @JoinColumn(name = "user_id")
         private User auteurCommentaire;
 
-        @Column(length = 255)
+        @Column
         private Date date;
 
         public Commentaire() {
