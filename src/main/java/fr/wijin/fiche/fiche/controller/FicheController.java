@@ -22,6 +22,6 @@ public class FicheController {
 
         model.addAttribute("fiches", ficheDtos);
 
-        return "listfiches";
+        return "fiche/listfiches";
     }
 }
