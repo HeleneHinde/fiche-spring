@@ -11,4 +11,9 @@ public class LoginController {
     public String displayLoginForm() {
         return "logintest";
     }
+
+    @GetMapping("/")
+    public String index(){
+        return "home";
+    }
 }
