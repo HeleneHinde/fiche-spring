@@ -15,58 +15,60 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "commentaires")
 public class Commentaire implements Serializable {
-   
-        private static final long serialVersionUID = -5179286478965866248L;
 
-        @Id
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
-        private Long id;
+    private static final long serialVersionUID = -5179286478965866248L;
 
-        @Column(length = 255)
-        private String texteCommentaire;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-        @ManyToOne(fetch = FetchType.LAZY)
-        @JoinColumn(name = "user_id")
-        private User auteurCommentaire;
+    @Column(length = 255)
+    private String texteCommentaire;
 
-        @Column
-        private LocalDateTime date;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private User auteurCommentaire;
 
-        public Commentaire() {
-        }
+    @Column
+    private LocalDateTime date;
 
-        public Long getId() {
-            return id;
-        }
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "fiche_id")
+    private Fiche fiche;
 
-        public void setId(Long id) {
-            this.id = id;
-        }
+    public Commentaire() {
+    }
 
-        public String getTexteCommentaire() {
-            return texteCommentaire;
-        }
+    public Long getId() {
+        return id;
+    }
 
-        public void setTexteCommentaire(String texte) {
-            this.texteCommentaire = texte;
-        }
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-        public User getAuteurCommentaire() {
-            return auteurCommentaire;
-        }
+    public String getTexteCommentaire() {
+        return texteCommentaire;
+    }
 
-        public void setAuteurCommentaire(User auteurCommentaire) {
-            this.auteurCommentaire = auteurCommentaire;
-        }
+    public void setTexteCommentaire(String texte) {
+        this.texteCommentaire = texte;
+    }
 
-        public LocalDateTime getDate() {
-            return date;
-        }
+    public User getAuteurCommentaire() {
+        return auteurCommentaire;
+    }
 
-        public void setDate(LocalDateTime date) {
-            this.date = date;
-        }
+    public void setAuteurCommentaire(User auteurCommentaire) {
+        this.auteurCommentaire = auteurCommentaire;
+    }
 
+    public LocalDateTime getDate() {
+        return date;
+    }
 
-    
+    public void setDate(LocalDateTime date) {
+        this.date = date;
+    }
+
 }

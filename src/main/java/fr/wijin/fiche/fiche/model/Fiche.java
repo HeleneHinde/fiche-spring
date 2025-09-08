@@ -3,6 +3,7 @@ package fr.wijin.fiche.fiche.model;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -10,6 +11,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -30,6 +32,9 @@ public class Fiche implements Serializable{
 
         @ManyToOne(fetch = FetchType.LAZY)
         private User auteurFiche;
+
+        @OneToMany(mappedBy = "commentaires", cascade = CascadeType.ALL)
+        private Commentaire commentaires;
 
         public Fiche() {
         }
@@ -64,6 +69,14 @@ public class Fiche implements Serializable{
 
         public void setAuteurFiche(User auteurFiche) {
             this.auteurFiche = auteurFiche;
+        }
+
+        public Commentaire getCommentaires() {
+            return commentaires;
+        }
+
+        public void setCommentaires(Commentaire commentaires) {
+            this.commentaires = commentaires;
         }
 
         
