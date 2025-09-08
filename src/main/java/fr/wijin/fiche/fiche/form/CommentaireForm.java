@@ -1,8 +1,5 @@
 package fr.wijin.fiche.fiche.form;
 
-import java.time.LocalDateTime;
-
-import fr.wijin.fiche.fiche.model.User;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
