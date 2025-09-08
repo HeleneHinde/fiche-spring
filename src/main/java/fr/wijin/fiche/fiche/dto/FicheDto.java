@@ -2,8 +2,7 @@ package fr.wijin.fiche.fiche.dto;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
-
-import fr.wijin.fiche.fiche.model.User;
+import java.util.List;
 
 public class FicheDto implements Serializable{
     
@@ -15,7 +14,9 @@ public class FicheDto implements Serializable{
 
         private LocalDateTime date;
 
-        private User auteurFiche;
+        private UserDto auteurFiche;
+
+        private List<CategorieDto> categories;
 
         public FicheDto() {
         }
@@ -44,12 +45,20 @@ public class FicheDto implements Serializable{
             this.date = date;
         }
 
-        public User getAuteurFiche() {
+        public UserDto getAuteurFiche() {
             return auteurFiche;
         }
 
-        public void setAuteurFiche(User auteurFiche) {
+        public void setAuteurFiche(UserDto auteurFiche) {
             this.auteurFiche = auteurFiche;
+        }
+
+        public List<CategorieDto> getCategories() {
+            return categories;
+        }
+
+        public void setCategories(List<CategorieDto> categories) {
+            this.categories = categories;
         }
 
         

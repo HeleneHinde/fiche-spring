@@ -2,7 +2,6 @@ package fr.wijin.fiche.fiche.dto;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import fr.wijin.fiche.fiche.model.User;
 
 public class CommentaireDto implements Serializable {
    
@@ -12,8 +11,10 @@ public class CommentaireDto implements Serializable {
 
         private String texteCommentaire;
 
-        private User auteurCommentaire;
+        private UserDto auteurCommentaire;
 
+        private FicheDto fiche;
+        
         private LocalDateTime date;
 
         public CommentaireDto() {
@@ -35,11 +36,11 @@ public class CommentaireDto implements Serializable {
             this.texteCommentaire = texte;
         }
 
-        public User getAuteurCommentaire() {
+        public UserDto getAuteurCommentaire() {
             return auteurCommentaire;
         }
 
-        public void setAuteurCommentaire(User auteurCommentaire) {
+        public void setAuteurCommentaire(UserDto auteurCommentaire) {
             this.auteurCommentaire = auteurCommentaire;
         }
 
@@ -51,6 +52,11 @@ public class CommentaireDto implements Serializable {
             this.date = date;
         }
 
+        public FicheDto getFiche() {
+            return fiche;
+        }
 
-    
+        public void setFiche(FicheDto fiche) {
+            this.fiche = fiche;
+        }
 }
