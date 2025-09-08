@@ -10,6 +10,8 @@ public class FicheDto implements Serializable{
 
         private Long id;
 
+        private String titre;
+
         private String texteFiche;
 
         private LocalDateTime date;
@@ -59,6 +61,14 @@ public class FicheDto implements Serializable{
 
         public void setCategories(List<CategorieDto> categories) {
             this.categories = categories;
+        }
+
+        public String getTitre() {
+            return titre;
+        }
+
+        public void setTitre(String titre) {
+            this.titre = titre;
         }
 
         

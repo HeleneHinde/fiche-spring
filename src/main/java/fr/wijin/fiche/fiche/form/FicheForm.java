@@ -9,7 +9,11 @@ import jakarta.validation.constraints.Size;
 public class FicheForm {
 
     @NotNull
-    @Size(min = 2, max = 250)
+    @Size(min = 2, max = 200)
+    private String titre;
+
+    @NotNull
+    @Size(min = 2, max = 400)
     private String texteFiche;
 
     @NotNull
@@ -32,5 +36,13 @@ public class FicheForm {
 
     public void setCategorieDtos(List<CategorieDto> categorieDtos) {
         this.categorieDtos = categorieDtos;
+    }
+
+    public String getTitre() {
+        return titre;
+    }
+
+    public void setTitre(String titre) {
+        this.titre = titre;
     }
 }

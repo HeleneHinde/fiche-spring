@@ -21,6 +21,7 @@ public class FicheMapper {
         ficheDto.setId(fiche.getId());
         ficheDto.setTexteFiche(fiche.getTexteFiche());
         ficheDto.setCategories(fiche.getCategories().stream().map(categorieMapper::mapCategorieToCategorieDto).toList());
+        ficheDto.setTitre(fiche.getTitre());
         return ficheDto;
     }
 
@@ -31,6 +32,7 @@ public class FicheMapper {
         fiche.setId(ficheDto.getId());
         fiche.setTexteFiche(ficheDto.getTexteFiche());
         fiche.setCategories(ficheDto.getCategories().stream().map(categorieMapper::mapCategorieDtoToCategorie).toList());
+        fiche.setTitre(ficheDto.getTitre());
         return fiche;
     }
 

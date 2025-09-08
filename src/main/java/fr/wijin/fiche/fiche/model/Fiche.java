@@ -28,6 +28,9 @@ public class Fiche implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(length = 255)
+    private String titre;
+
     @Column(length = 500)
     private String texteFiche;
 
@@ -95,4 +98,13 @@ public class Fiche implements Serializable {
     public void setCategories(List<Categorie> categories) {
         this.categories = categories;
     }
+
+    public String getTitre() {
+        return titre;
+    }
+
+    public void setTitre(String titre) {
+        this.titre = titre;
+    }
+    
 }
