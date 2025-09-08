@@ -2,6 +2,7 @@ package fr.wijin.fiche.fiche.model;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.List;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -34,7 +35,7 @@ public class Fiche implements Serializable{
         private User auteurFiche;
 
         @OneToMany(mappedBy = "commentaires", cascade = CascadeType.ALL)
-        private Commentaire commentaires;
+        private List<Commentaire> commentaires;
 
         public Fiche() {
         }
@@ -71,11 +72,11 @@ public class Fiche implements Serializable{
             this.auteurFiche = auteurFiche;
         }
 
-        public Commentaire getCommentaires() {
+        public List<Commentaire> getCommentaires() {
             return commentaires;
         }
 
-        public void setCommentaires(Commentaire commentaires) {
+        public void setCommentaires(List<Commentaire> commentaires) {
             this.commentaires = commentaires;
         }
 
