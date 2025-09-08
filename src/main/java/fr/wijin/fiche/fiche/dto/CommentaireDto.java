@@ -3,6 +3,9 @@ package fr.wijin.fiche.fiche.dto;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class CommentaireDto implements Serializable {
    
         private static final long serialVersionUID = -6478965866248L;

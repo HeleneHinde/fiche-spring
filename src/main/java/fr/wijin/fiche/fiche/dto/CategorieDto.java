@@ -2,6 +2,9 @@ package fr.wijin.fiche.fiche.dto;
 
 import java.io.Serializable;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class CategorieDto implements Serializable {
 
     private static final long serialVersionUID = -51792248L;

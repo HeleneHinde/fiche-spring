@@ -3,8 +3,11 @@ package fr.wijin.fiche.fiche.dto;
 import java.io.Serializable;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 import fr.wijin.fiche.fiche.model.enums.Grants;
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class UserDto implements Serializable {
     
     private static final long serialVersionUID = -66248L;
