@@ -1,7 +1,7 @@
 package fr.wijin.fiche.fiche.model;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -26,7 +26,7 @@ public class Fiche implements Serializable{
         private String texteFiche;
 
         @Column
-        private Date date;
+        private LocalDateTime date;
 
         @ManyToOne(fetch = FetchType.LAZY)
         private User auteurFiche;
@@ -50,11 +50,11 @@ public class Fiche implements Serializable{
             this.texteFiche = texteFiche;
         }
 
-        public Date getDate() {
+        public LocalDateTime getDate() {
             return date;
         }
 
-        public void setDate(Date date) {
+        public void setDate(LocalDateTime date) {
             this.date = date;
         }
 

@@ -2,7 +2,6 @@ package fr.wijin.fiche.fiche.dto;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.Date;
 import fr.wijin.fiche.fiche.model.User;
 
 public class CommentaireDto implements Serializable {
