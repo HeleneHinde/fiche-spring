@@ -3,6 +3,8 @@ package fr.wijin.fiche.fiche.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.access.hierarchicalroles.RoleHierarchy;
+import org.springframework.security.access.hierarchicalroles.RoleHierarchyImpl;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.ProviderManager;
@@ -14,6 +16,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler;
 
 @EnableWebSecurity
 @EnableMethodSecurity
@@ -30,7 +33,7 @@ public class SecurityConfig {
         httpSecurity
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/login", "/inc/**", "/css/**", "/js/**", "/images/**").permitAll() // Permettre l'accès aux ressources statiques
+                        .requestMatchers("/login", "/inc/**", "/css/**", "/js/**", "/images/**").permitAll()
                         .anyRequest().authenticated())
                 .formLogin(form -> form
                         .loginPage("/login")
@@ -39,14 +42,15 @@ public class SecurityConfig {
         return httpSecurity.build();
     }
 
-        // SecurityFilterChain pour les APIs (Basic Auth)
+    // SecurityFilterChain pour les APIs (Basic Auth)
     @Bean
     @org.springframework.core.annotation.Order(1)
     public SecurityFilterChain apiFilterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
-                .securityMatcher("/users/**", "/commentaires/**", "/fiches/**", "/categories/**") // Applique seulement aux URLs /customers/**
+                .securityMatcher("/users/**", "/commentaires/**", "/fiches/**", "/categories/**")
                 .csrf(csrf -> csrf.disable())
-                .httpBasic(httpBasicCustomizer -> {})
+                .httpBasic(httpBasicCustomizer -> {
+                })
                 .authorizeHttpRequests(auth -> auth
                         .anyRequest().authenticated());
         return httpSecurity.build();
@@ -59,15 +63,26 @@ public class SecurityConfig {
 
     @Bean
     public AuthenticationProvider getAuthenticationProvider() {
-        DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
-
+        DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider(userDetailsService);
         authenticationProvider.setPasswordEncoder(getPasswordEncoder());
-        authenticationProvider.setUserDetailsService(userDetailsService);
         return authenticationProvider;
     }
 
     @Bean
     public AuthenticationManager getAuthenticationManager() {
         return new ProviderManager(getAuthenticationProvider());
+    }
+
+    @Bean
+    public RoleHierarchy roleHierarchy() {
+        String hierarchy = "ROLE_SUPER_ADMIN > ROLE_ADMIN \n ROLE_ADMIN > ROLE_USER";
+        return RoleHierarchyImpl.fromHierarchy(hierarchy);
+    }
+
+    @Bean
+    public DefaultWebSecurityExpressionHandler customWebSecurityExpressionHandler() {
+        DefaultWebSecurityExpressionHandler expressionHandler = new DefaultWebSecurityExpressionHandler();
+        expressionHandler.setRoleHierarchy(roleHierarchy());
+        return expressionHandler;
     }
 }
