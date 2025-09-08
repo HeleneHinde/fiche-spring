@@ -12,6 +12,7 @@ public class FicheMapper {
     @Autowired
     private UserMapper userMapper;
 
+    @Autowired
     private CategorieMapper categorieMapper;
 
     public FicheDto mapFicheToFicheDto(Fiche fiche) {
