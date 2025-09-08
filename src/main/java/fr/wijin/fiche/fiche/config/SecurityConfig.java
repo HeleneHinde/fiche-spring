@@ -39,6 +39,19 @@ public class SecurityConfig {
         return httpSecurity.build();
     }
 
+        // SecurityFilterChain pour les APIs (Basic Auth)
+    @Bean
+    @org.springframework.core.annotation.Order(1)
+    public SecurityFilterChain apiFilterChain(HttpSecurity httpSecurity) throws Exception {
+        httpSecurity
+                .securityMatcher("/users/**", "/commentaires/**", "/fiches/**", "/categories/**") // Applique seulement aux URLs /customers/**
+                .csrf(csrf -> csrf.disable())
+                .httpBasic(httpBasicCustomizer -> {})
+                .authorizeHttpRequests(auth -> auth
+                        .anyRequest().authenticated());
+        return httpSecurity.build();
+    }
+
     @Bean
     public PasswordEncoder getPasswordEncoder() {
         return new BCryptPasswordEncoder();
