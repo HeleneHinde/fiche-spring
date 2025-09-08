@@ -43,13 +43,14 @@ public class FicheRestController {
     }
 
     @PreAuthorize("hasRole('ADMIN')")
-    @PostMapping(value = "/fiches", produces = { "application/json" }, consumes={ "application/json" })
-    public ResponseEntity<FicheDto> postFicheRest(@Valid @RequestBody FicheDto ficheDto){
+    @PostMapping(value = "/fiches", produces = { "application/json" }, consumes = { "application/json" })
+    public ResponseEntity<FicheDto> postFicheRest(@Valid @RequestBody FicheDto ficheDto) {
         FicheDto created = ficheService.save(ficheDto);
         return ResponseEntity.status(HttpStatus.CREATED).body(created);
     }
 
-    @DeleteMapping(value = "/fiches/{id}" , produces = { "application/json" })
+    @PreAuthorize("hasRole('ADMIN')")
+    @DeleteMapping(value = "/fiches/{id}", produces = { "application/json" })
     public ResponseEntity<Void> deleteFicheRest(@PathVariable("id") Integer id) {
 
         FicheDto fiche = ficheService.findById(id).orElse(null);
@@ -62,6 +63,5 @@ public class FicheRestController {
             ficheService.delete(ficheService.findById(id).orElse(null));
             return ResponseEntity.noContent().build();
         }
-
     }
 }
