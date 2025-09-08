@@ -1,6 +1,7 @@
 package fr.wijin.fiche.fiche.model;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 import jakarta.persistence.Column;
@@ -31,7 +32,7 @@ public class Commentaire implements Serializable {
         private User auteurCommentaire;
 
         @Column
-        private Date date;
+        private LocalDateTime date;
 
         public Commentaire() {
         }
@@ -60,11 +61,11 @@ public class Commentaire implements Serializable {
             this.auteurCommentaire = auteurCommentaire;
         }
 
-        public Date getDate() {
+        public LocalDateTime getDate() {
             return date;
         }
 
-        public void setDate(Date date) {
+        public void setDate(LocalDateTime date) {
             this.date = date;
         }
 
