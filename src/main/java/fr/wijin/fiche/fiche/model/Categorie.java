@@ -1,12 +1,14 @@
 package fr.wijin.fiche.fiche.model;
 
 import java.io.Serializable;
+import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -21,6 +23,9 @@ public class Categorie implements Serializable {
 
     @Column(length = 255)
     private String nom;
+
+    @ManyToMany(mappedBy = "categories")
+    private List<Fiche> fiches;
     
     public Categorie() {
     }
@@ -37,4 +42,14 @@ public class Categorie implements Serializable {
     public void setNom(String nom) {
         this.nom = nom;
     }
+
+    public List<Fiche> getFiches() {
+        return fiches;
+    }
+
+    public void setFiches(List<Fiche> fiches) {
+        this.fiches = fiches;
+    }
+
+    
 }

@@ -11,74 +11,88 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "fiches")
-public class Fiche implements Serializable{
-    
-        private static final long serialVersionUID = -4561516486454L;
+public class Fiche implements Serializable {
 
-        @Id
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
-        private Long id;
+    private static final long serialVersionUID = -4561516486454L;
 
-        @Column(length = 500)
-        private String texteFiche;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-        @Column
-        private LocalDateTime date;
+    @Column(length = 500)
+    private String texteFiche;
 
-        @ManyToOne(fetch = FetchType.LAZY)
-        private User auteurFiche;
+    @Column
+    private LocalDateTime date;
 
-        @OneToMany(mappedBy = "commentaires", cascade = CascadeType.ALL)
-        private List<Commentaire> commentaires;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private User auteurFiche;
 
-        public Fiche() {
-        }
+    @OneToMany(mappedBy = "commentaires", cascade = CascadeType.ALL)
+    private List<Commentaire> commentaires;
 
-        public Long getId() {
-            return id;
-        }
+    @ManyToMany(cascade = CascadeType.DETACH)
+    @JoinTable(name = "fiche_categorie", joinColumns = { @JoinColumn(name = "fiche_id") }, inverseJoinColumns = {
+            @JoinColumn(name = "cetegorie_id") })
+    private List<Categorie> categories;
 
-        public void setId(Long id) {
-            this.id = id;
-        }
+    public Fiche() {
+    }
 
-        public String getTexteFiche() {
-            return texteFiche;
-        }
+    public Long getId() {
+        return id;
+    }
 
-        public void setTexteFiche(String texteFiche) {
-            this.texteFiche = texteFiche;
-        }
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-        public LocalDateTime getDate() {
-            return date;
-        }
+    public String getTexteFiche() {
+        return texteFiche;
+    }
 
-        public void setDate(LocalDateTime date) {
-            this.date = date;
-        }
+    public void setTexteFiche(String texteFiche) {
+        this.texteFiche = texteFiche;
+    }
 
-        public User getAuteurFiche() {
-            return auteurFiche;
-        }
+    public LocalDateTime getDate() {
+        return date;
+    }
 
-        public void setAuteurFiche(User auteurFiche) {
-            this.auteurFiche = auteurFiche;
-        }
+    public void setDate(LocalDateTime date) {
+        this.date = date;
+    }
 
-        public List<Commentaire> getCommentaires() {
-            return commentaires;
-        }
+    public User getAuteurFiche() {
+        return auteurFiche;
+    }
 
-        public void setCommentaires(List<Commentaire> commentaires) {
-            this.commentaires = commentaires;
-        }
+    public void setAuteurFiche(User auteurFiche) {
+        this.auteurFiche = auteurFiche;
+    }
 
-        
+    public List<Commentaire> getCommentaires() {
+        return commentaires;
+    }
+
+    public void setCommentaires(List<Commentaire> commentaires) {
+        this.commentaires = commentaires;
+    }
+
+    public List<Categorie> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(List<Categorie> categories) {
+        this.categories = categories;
+    }
 }
