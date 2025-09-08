@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liste des fiches</title>
+</head>
+
+<body>
+    <div th:insert="inc/menu"></div>
+    <div th:if="${#lists.isEmpty(fiches)}">
+        <p class="error">Aucun client enregistré</p>
+    </div>
+    <div th:if="${!#lists.isEmpty(fiches)}">
+        <table>
+            <caption>Liste des fiches</caption>
+            <tr>
+                <th scope="col">Titre </th>
+                <th scope="col">Date </th>
+                <th scope="col">Auteur </th>
+                <th scope="col">Catégorie </th>
+                <th scope="col" class="action">Action</th>
+            </tr>
+            <tr th:each="fiche, boucle : ${fiches}"
+					th:class="${boucle.index % 2 == 0} ? 'pair' : 'impair'" th:object="${fiche}">
+					<td th:text="*{titre}"></td>
+					<td th:text="*{date}"></td>
+					<td th:text="*{auteurFiche}"></td>
+					<td></td>
+					<td class="action">
+						<a href="#">
+							<img th:src="@{/inc/delete.png}" alt="Supprimer" />
+						</a>
+					</td>
+            </tr>
+        </table>
+</body>
+
+</html>
