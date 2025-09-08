@@ -8,10 +8,10 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import fr.wijin.fiche.fiche.dto.CategorieDto;
 import fr.wijin.fiche.fiche.form.CategorieForm;
@@ -43,27 +43,34 @@ public class CategorieController {
 
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/createcategorie")
-    public String createPostCategorie(@Valid CategorieForm categorieForm, BindingResult bindingResult, Model model) {
+    public String createPostCategorie(@Valid CategorieForm categorieForm, BindingResult bindingResult, Model model,
+            RedirectAttributes redirectAttributes) {
 
         if (!bindingResult.hasErrors()) {
             CategorieDto categorieDto = new CategorieDto();
             categorieDto.setNom(categorieForm.getNom());
-            CategorieDto created = categorieService.save(categorieDto);
-            return "redirect:/showcategorie/" + created.getId();
+            categorieService.save(categorieDto);
+            redirectAttributes.addFlashAttribute("success", "Catégorie créée avec succès");
+            return "redirect:/listcategories";
         }
-
+        redirectAttributes.addFlashAttribute("error", "Impossible de créer la catégorie");
         return "categorie/createcategorie";
     }
 
     @PreAuthorize("hasRole('ADMIN')")
-    @DeleteMapping("/deletecategorie/{id}")
-    public String deleteCategorie(@RequestParam("id") Integer id, Model model) {
+    @GetMapping("/deletecategorie")
+    public String deleteCategorie(@RequestParam("id") Integer id, RedirectAttributes redirectAttributes) {
+        Optional<CategorieDto> categorie = null;
         try {
-            Optional<CategorieDto> categorie = categorieService.findById(id);
+            categorie = categorieService.findById(id);
             if (categorie.isPresent()) {
                 categorieService.delete(categorie.get());
+                redirectAttributes.addFlashAttribute("success", "Catégorie supprimée avec succès");
+            } else {
+                redirectAttributes.addFlashAttribute("error", "Catégorie introuvable");
             }
         } catch (Exception e) {
+            redirectAttributes.addFlashAttribute("error", "Impossible de supprimer la catégorie");
         }
         return "redirect:/listcategories";
     }

@@ -29,7 +29,7 @@
 					<td th:text="*{auteurFiche.username}"></td>
 					<td></td>
 					<td class="action">
-						<a href="#">
+						<a th:href="@{/deletefiche(id=*{id})}">
 							<img th:src="@{/delete.png}" alt="Supprimer" />
 						</a>
 					</td>

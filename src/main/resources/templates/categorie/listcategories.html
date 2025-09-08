@@ -8,11 +8,18 @@
 </head>
 
 <body>
-    <div th:insert="inc/menu"></div>
+    <div th:insert="~{inc/menu}"></div>
     <div th:if="${#lists.isEmpty(categories)}">
         <p class="error">Aucun client enregistré</p>
     </div>
+    <div th:if="${error} != null">
+        <p th:text="${error}" class="error"></p>
+    </div>
+    <div th:if="${success} != null">
+        <p th:text="${success}" class="success"></p>
+    </div>
     <div th:if="${!#lists.isEmpty(categories)}">
+        <a th:href="@{/createcategorie}">Créer une catégorie</a>
         <table>
             <caption>Liste des catégories</caption>
             <tr>
@@ -23,12 +30,13 @@
 					th:class="${boucle.index % 2 == 0} ? 'pair' : 'impair'" th:object="${categorie}">
 					<td th:text="*{nom}"></td>
 					<td class="action">
-						<a href="#">
+						<a th:href="@{/deletecategorie(id=*{id})}">
 							<img th:src="@{/delete.png}" alt="Supprimer" />
 						</a>
 					</td>
             </tr>
         </table>
+    </div>
 </body>
 
 </html>
