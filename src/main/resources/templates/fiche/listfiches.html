@@ -25,8 +25,8 @@
             <tr th:each="fiche, boucle : ${fiches}"
 					th:class="${boucle.index % 2 == 0} ? 'pair' : 'impair'" th:object="${fiche}">
 					<td th:text="*{titre}"></td>
-					<td th:text="*{date}"></td>
-					<td th:text="*{auteurFiche}"></td>
+					<td th:text="${#temporals.format(fiche.date, 'dd-MMM-yyyy')}"></td>
+					<td th:text="*{auteurFiche.username}"></td>
 					<td></td>
 					<td class="action">
 						<a href="#">
