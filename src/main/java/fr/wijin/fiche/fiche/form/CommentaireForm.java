@@ -12,12 +12,6 @@ public class CommentaireForm {
         @Size(min = 2, max = 250)
         private String texteCommentaire;
 
-        @NotNull
-        private User auteurCommentaire;
-
-        @NotNull
-        private LocalDateTime date;
-
         public CommentaireForm() {
         }
 
@@ -27,21 +21,5 @@ public class CommentaireForm {
 
         public void setTexteCommentaire(String texte) {
             this.texteCommentaire = texte;
-        }
-
-        public User getAuteurCommentaire() {
-            return auteurCommentaire;
-        }
-
-        public void setAuteurCommentaire(User auteurCommentaire) {
-            this.auteurCommentaire = auteurCommentaire;
-        }
-
-        public LocalDateTime getDate() {
-            return date;
-        }
-
-        public void setDate() {
-            this.date = LocalDateTime.now();
         }
 }
