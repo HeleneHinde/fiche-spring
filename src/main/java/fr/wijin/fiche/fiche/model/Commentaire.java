@@ -71,4 +71,13 @@ public class Commentaire implements Serializable {
         this.date = date;
     }
 
+    public Fiche getFiche() {
+        return fiche;
+    }
+
+    public void setFiche(Fiche fiche) {
+        this.fiche = fiche;
+    }
+
+    
 }
