@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Créer catégorie</title>
+</head>
+
+<body>
+    <form th:action="@{/createcetagorie}" th:object="${categorieForm}" method="post" accept-charset="UTF-8">
+        <fieldset>
+            <legend>Catégorie</legend>
+            <label for="nom">Nom <span class="required">*</span></label>
+            <input id="nom" type="text" th:field="*{nom}" maxlength="100" />
+            <div class="error" th:if="${#fields.hasErrors('nom')}" th:errors="*{nom}"></div>
+        </fieldset>
+        <button type="submit" class="submitButton">Valider</button>
+        <button type="reset" class="resetButton">Remettre à zéro</button>
+        <br />
+    </form>
+</body>
+
+</html>
